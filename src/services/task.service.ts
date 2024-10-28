@@ -2,12 +2,12 @@ import { database } from "../config/database";
 import { ICreateTask, IUpdateTask } from "../utils/interfaces/task.interface";
 
 const table = "task";
+const alias = "t"  
 
 export class TaskServices {
   static async getTask() {
     try {
-      // const query = `SELECT * FROM ${table}`;
-      const query = `SELECT t.task_id, t.name_task, t.description, t.estimated_time, c.name_category  FROM ${table} t JOIN categories c ON t.category = c.category_id;`;
+      const query = `SELECT t.task_id, t.name_task, t.description, t.estimated_time, c.name_category  FROM ${table} ${alias} JOIN categories c ON t.category = c.category_id ORDER BY t.task_id DESC;`;
       const result = await database.query(query);
       return result;
     } catch (error) {

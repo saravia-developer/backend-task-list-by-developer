@@ -1,18 +1,18 @@
-import mysql from 'mysql2';
-import { Connection } from 'mysql2/typings/mysql/lib/Connection';
-import { AppDate } from '../lib/app-date';
+import mysql, { Connection } from "mysql2";
+import { AppDate } from "../lib/app-date";
+import { env } from "../utils/env";
 
 class MYSQL {
-  db: Connection
-  
+  db: Connection;
+
   constructor() {
     this.db = mysql.createConnection({
-      port: 3322,
-      host: 'localhost',
-      user: 'root',
-      password: 'saravia',
-      database: 'task-list-by-developer'
-    })
+      port: env.database.port, 
+      host: env.database.host,
+      user: env.database.user,
+      password: env.database.password,
+      database: env.database.database,
+    });
 
     this.testConnection()
   }
@@ -28,9 +28,4 @@ class MYSQL {
   }
 }
 
-export const database = new MYSQL().db.promise()
-
-// if(err) {
-//   console.log('aplicación sin conexión a la base de datos');
-//   return;
-// }
+export const database = new MYSQL().db

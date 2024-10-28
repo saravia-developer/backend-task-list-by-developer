@@ -3,12 +3,13 @@ import { AppDate } from "../lib/app-date";
 import { ICreateCategory, IUpdateCategory } from "../utils/interfaces/category.interface";
 
 const table = 'categories';
+const alias = 'c';
 
 export class CategoryServices {
 
   static async getCategory() {
     try {
-      const query = `SELECT * FROM ${table}`;
+      const query = `SELECT ${alias}.category_id, ${alias}.name_category FROM ${table} ${alias}`;
       const result = await database.query(query)
       return result
     } catch (error) {
@@ -18,7 +19,7 @@ export class CategoryServices {
 
   static async getCategoryById(id: number) {
     try {
-      const query = `SELECT * FROM ${table} WHERE category_id=${id}`;
+      const query = `SELECT ${alias}.category_id, ${alias}.name_category FROM ${table} WHERE category_id=${id}`;
       const result = await database.query(query)
       return result
     } catch (error) {
