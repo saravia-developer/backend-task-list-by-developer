@@ -14,18 +14,19 @@ class MYSQL {
       database: env.database.database,
     });
 
-    this.testConnection()
+    this.testConnection();
   }
 
-  testConnection() {
-    this.db.connect((err) => {
-      if(err) {
-        console.log('No se conectó la base de datos: ', err)
-      }
-      console.log('Conectado exitosamente')  
-      console.log(new AppDate().toMYSQLDatetime())  
-    })
+  async testConnection() {
+    this.db
+      .connect((err) => {
+        if(err)
+          console.log("No se conectó la base de datos: ", err)
+        
+        console.log("Conectado exitosamente...");
+        console.log(new AppDate().toMYSQLDatetime());
+      });
   }
 }
 
-export const database = new MYSQL().db
+export const database = new MYSQL().db.promise();
