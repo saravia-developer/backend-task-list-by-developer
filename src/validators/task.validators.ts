@@ -1,6 +1,4 @@
-import validator, { check, Meta, ValidationChain, validationResult } from "express-validator";
-import { taskMiddleware } from "../middleware/task.middleware";
-import { NextFunction, Request, Response } from "express";
+import { check, Meta, ValidationChain } from "express-validator";
 
 class TaskValidators {
   validate: ValidationChain[]
@@ -10,8 +8,7 @@ class TaskValidators {
       check("nameTask")
         .isString().withMessage("El campo 'nameTask' tiene que ser un texto")
         .notEmpty().withMessage("El campo 'nameTask' no tiene un valor, tiene que asignarselo")
-        .isLength({ min: 2, max: 60 }).withMessage((value, meta: Meta) => {
-          // meta = { req: Request, location: "body", path: "" };
+        .isLength({ min: 2, max: 60 }).withMessage((_, meta: Meta) => {
           return `El título 'nameTask' tiene que tener un mínimo de caracteres de 2 y máximo de 60, error localizado en el ${meta.location}`;
         }),
 

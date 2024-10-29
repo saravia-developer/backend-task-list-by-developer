@@ -15,7 +15,7 @@ class CategoryController {
     this.router.delete('/:id', this.deleteCategory.bind(this))
   }
 
-  async getCategory(req: Request, res: Response, next: NextFunction) {
+  async getCategory(_req: Request, res: Response, next: NextFunction) {
     try {
       const response = await CategoryServices.getCategory()
       res.json({ success: true, response }) 
