@@ -14,7 +14,7 @@ class TaskController {
     this.router.delete('/:id', this.deleteTask.bind(this))
   }
 
-  async getTask(req: Request, res: Response, next: NextFunction) {
+  async getTask(_req: Request, res: Response, next: NextFunction) {
     try {
       const response = await TaskServices.getTask()
       res.json({ success: true, response }) 
